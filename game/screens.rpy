@@ -91,7 +91,7 @@ style input:
 
 style splash_text:
     size 24
-    color "#000"
+    color "#ffffff"
     font gui.default_font
     text_align 0.5
     outlines []

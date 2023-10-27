@@ -29,8 +29,13 @@ init python:
     # This array variable stores different kinds of splash messages you can use
     # to show to the player on startup.
     splash_messages = [
-        "Please support Doki Doki Literature Club.",
-        "Monika is watching you code."
+        "Be with me forever, won't you?~",
+        "You'd be an idiot not to stay with me!",
+        "You'll pick me, right, silly~",
+        "I...wish to be t-the one with you...",
+        "There's no chance you aren't in love with me, right?",
+        "Saturdays are for the boys!",
+        "Heh...these other girls are no match for me."
     ]
 
     ### New in 3.0.0
@@ -250,11 +255,20 @@ transform menu_art_move(z, x, z2):
 # This image stores the Tean Salvato logo image that appears when the game starts.
 image intro:
     truecenter
-    "white"
+    "black"
     0.5
     "bg/splash.png" with Dissolve(0.5, alpha=True)
     2.5
-    "white" with Dissolve(0.5, alpha=True)
+    "black" with Dissolve(0.5, alpha=True)
+    0.5
+
+image modintro:
+    truecenter
+    "black"
+    0.5
+    "mod_assets/splash.png" with Dissolve(0.5, alpha=True)
+    2.5
+    "black" with Dissolve(0.5, alpha=True)
     0.5
 
 # This image is a left over from DDLC's development that shows the splash message
@@ -320,24 +334,6 @@ label splashscreen:
             if user:
                 currentuser = user
 
-    ## This if statement checks if we have passed the disclaimer and that the
-    ## current version of the mod equals the old one or the autoload is set to 
-    ## the post-credit loop.
-    if persistent.first_run and (config.version == persistent.oldversion or persistent.autoload == "postcredits_loop"):
-        $ quick_menu = False
-        scene black
-
-        menu:
-            "A previous save file has been found. Would you like to delete your save data and start over?"
-            "Yes, delete my existing data.":
-                "Deleting save data...{nw}"
-                python:
-                    delete_all_saves()
-                    renpy.loadsave.location.unlink_persistent()
-                    renpy.persistent.should_save_persistent = False
-                    renpy.utter_restart()
-            "No, continue where I left off.":
-                $ restore_relevant_characters()
 
     if renpy.version_tuple == (6, 99, 12, 4, 2187) and not renpy.get_autoreload():
         if os.path.exists(config.gamedir + "/definitions/splash.rpy"):
@@ -520,16 +516,16 @@ label splashscreen:
     #     pause
     #     $ renpy.quit()
 
-    show white
-    $ persistent.ghost_menu = False
-    $ splash_message = splash_message_default
+    show black
+    $ splash_message = renpy.random.choice(splash_messages)
     $ config.main_menu_music = audio.t1
     $ renpy.music.play(config.main_menu_music)
     show intro with Dissolve(0.5, alpha=True)
     $ pause(2.5)
     hide intro with Dissolve(0.5, alpha=True)
-    if persistent.playthrough == 2 and renpy.random.randint(0, 3) == 0:
-        $ splash_message = renpy.random.choice(splash_messages)
+    show modintro with Dissolve(0.5, alpha=True)
+    $ pause(2.5)
+    hide modintro with Dissolve(0.5, alpha=True)
     show splash_warning "[splash_message]" with Dissolve(0.5, alpha=True)
     $ pause(1.5)
     hide splash_warning with Dissolve(0.5, alpha=True)
