@@ -39,7 +39,7 @@ init python:
 default translations = scan_translations()
 
 # Enables the ability to add more settings in the game such as Uncensored Mode.
-default extra_settings = True
+default extra_settings = False
 # If you are using the Extras Menu feature, set this line to True.
 default enable_extras_menu = False
 # If you are going to use extra languages, set this to True.
@@ -330,7 +330,7 @@ screen choice(items):
 
     vbox:
 
-        for i in items:
+        for m, i in enumerate(items, start=1):
             
             if "kwargs=" in i.caption:
 
@@ -353,16 +353,20 @@ screen choice(items):
                         hover_background Frame(im.MatrixColor(im.MatrixColor("gui/button/choice_hover_background.png", im.matrix.desaturate() * im.matrix.contrast(1.29) * im.matrix.colorize("#00f", "#fff") * im.matrix.saturation(120)), 
                             im.matrix.desaturate() * im.matrix.colorize(arg1, "#fff")), gui.choice_button_borders)
                         action i.action
+                        at button_animation(m * 0.1)
 
                 else:
 
                     textbutton caption:
                         style kwarg
                         action i.action
+                        at button_animation(m * 0.1)
 
             else:
 
-                textbutton i.caption action i.action
+                textbutton i.caption:
+                    action i.action
+                    at button_animation(m * 0.1)
 
 
 ## When this is true, menu captions will be spoken by the narrator. When false,
@@ -491,10 +495,7 @@ screen navigation():
 
             if main_menu:
 
-                if persistent.playthrough == 1:
-                    textbutton _("ŔŗñĮ¼»ŧþŀÂŻŕěōì«") action If(persistent.playername, true=Start(), false=Show(screen="name_input", message="Please enter your name", ok_action=Function(FinishEnterName)))
-                else:
-                    textbutton _("New Game") action If(persistent.playername, true=Start(), false=Show(screen="name_input", message="Please enter your name", ok_action=Function(FinishEnterName)))
+                textbutton _("New Game") action If(persistent.playername, true=Start(), false=Show(screen="name_input", message="Please enter your name", ok_action=Function(FinishEnterName)))
 
             else:
 
@@ -504,30 +505,16 @@ screen navigation():
 
             textbutton _("Load Game") action [ShowMenu("load"), SensitiveIf(renpy.get_screen("load") == None)]
 
-            if enable_extras_menu:
-                textbutton _("Extras") action [ShowMenu("extras"), SensitiveIf(renpy.get_screen("extras") == None)]
+            textbutton _("Achievements") action [ShowMenu("achievements"), SensitiveIf(renpy.get_screen("extras") == None)]
 
-            if _in_replay:
-
-                textbutton _("End Replay") action EndReplay(confirm=True)
-
-            elif not main_menu:
-                if persistent.playthrough != 3:
-                    textbutton _("Main Menu") action MainMenu()
-                else:
-                    textbutton _("Main Menu") action NullAction()
+            if not main_menu:
+                textbutton _("Main Menu") action MainMenu()
 
             textbutton _("Settings") action [ShowMenu("preferences"), SensitiveIf(renpy.get_screen("preferences") == None)]
 
-            if not enable_extras_menu:
-                textbutton _("Credits") action ShowMenu("about")
+            textbutton _("Credits") action ShowMenu("about")
 
             if renpy.variant("pc"):
-
-                ## Help isn't necessary or relevant to mobile devices.
-                #textbutton _("Help") action OpenURL("https://github.com/GanstaKingofSA/DDLCModTemplate2.0")
-
-                ## The quit button is banned on iOS and unnecessary on Android.
                 textbutton _("Quit") action Quit(confirm=not main_menu)
         else:
             timer 1.75 action Start("autoload_yurikill")
@@ -873,16 +860,6 @@ screen load():
 
     use file_slots(_("Load"))
 
-init python:
-    def FileActionMod(name, page=None, **kwargs):
-        if persistent.playthrough == 1 and not persistent.deleted_saves and renpy.current_screen().screen_name[0] == "load" and FileLoadable(name):
-            return Show(screen="dialog", message="File error: \"characters/sayori.chr\"\n\nThe file is missing or corrupt.",
-                ok_action=Show(screen="dialog", message="The save file is corrupt. Starting a new game.", ok_action=Function(renpy.full_restart, label="start")))
-        elif persistent.playthrough == 3 and renpy.current_screen().screen_name[0] == "save":
-            return Show(screen="dialog", message="There's no point in saving anymore.\nDon't worry, I'm not going anywhere.", ok_action=Hide("dialog"))
-        else:
-            return FileAction(name)
-
 
 screen file_slots(title):
 
@@ -923,7 +900,7 @@ screen file_slots(title):
                     $ slot = i + 1
 
                     button:
-                        action FileActionMod(slot)
+                        action FileAction(slot)
 
                         has vbox
 
@@ -1227,23 +1204,6 @@ screen ddlc_preferences():
 screen template_preferences():
     hbox:
         box_wrap True
-
-        if extra_settings:
-            vbox:
-                style_prefix "check"
-                label _("Game Modes")
-                textbutton _("Uncensored Mode") action If(persistent.uncensored_mode, 
-                    ToggleField(persistent, "uncensored_mode"), 
-                    Show("confirm", message="Are you sure you want to turn on Uncensored Mode?\nDoing so will enable more adult/sensitive\ncontent in your playthrough.\n\nThis setting will be dependent on the modder if\nthey programmed these checks in their story.", 
-                        yes_action=[Hide("confirm"), ToggleField(persistent, "uncensored_mode")],
-                        no_action=Hide("confirm")
-                    ))
-                textbutton _("Let's Play Mode") action If(persistent.lets_play, 
-                    ToggleField(persistent, "lets_play"),
-                    [ToggleField(persistent, "lets_play"), Show("dialog", 
-                        message="You have enabled Let's Play Mode.\nThis mode allows you to skip content that\ncontains sensitive information or apply alternative\nstory options.\n\nThis setting will be dependent on the modder\nif they programmed these checks in their story.", 
-                        ok_action=Hide("dialog")
-                    )])
         
         vbox:
             style_prefix "name"
@@ -1258,6 +1218,10 @@ screen template_preferences():
             
             textbutton _("Change Name") action Show(screen="name_input", message="Please enter your name", ok_action=Function(FinishEnterName, launchGame=False)):
                 text_style "navigation_button_text"
+            
+            textbutton _("Delete Persistent"):
+                action Confirm("Are you sure you want to delete your persistent?", Function(reset_persistent))
+                style "navigation_button" # Just using a predefined style here
 
         null height (4 * gui.pref_spacing)
 

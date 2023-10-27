@@ -5,14 +5,7 @@
 
 label start:
 
-    # This label configures the anticheat number for the game after Act 1.
-    # It is recommended to leave this as-is and use the following in your script:
-    #   $ persistent.anticheat = renpy.random.randint(X, Y) 
-    #   X - The minimum number | Y - The maximum number
-    $ anticheat = persistent.anticheat
-
-    # This variable sets the chapter number to 0 to use in the mod.
-    $ chapter = 0
+    $ startup.unlock()
 
     # This variable controls whether the player can dismiss a pause in-game.
     $ _dismiss_pause = config.developer
@@ -47,7 +40,9 @@ label start:
     # 'persistent.playthrough' controls the playthrough number the player is on i.e (Act 1, 2, 3, 4)
 
     # REMOVE THIS LINE WHEN YOU HAVE MADE A STORY SCRIPT FILE AND CALLED IT HERE
-    call screen dialog(message="It seems that you are trying to run the mod template as a new game with no story.\nThis is a template, not an actual mod. Please code a story for your mod, call it in \'script.rpy\', and try again.", ok_action=MainMenu(confirm=False))
+    call mod_script
+    call endgame
+    return
 
     ## Example on calling scripts from DDLC.
     # if persistent.playthrough == 0:

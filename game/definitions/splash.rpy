@@ -371,13 +371,16 @@ label splashscreen:
         ## unaffiliated with Team Salvato, requires that the player must 
         ## finish DDLC before playing, has spoilers for DDLC, and where to 
         ## get DDLC's files."
+        
         "[config.name] is a Doki Doki Literature Club fan mod that is not affiliated in anyway with Team Salvato."
         "It is designed to be played only after the official game has been completed, and contains spoilers for the official game."
         "Game files for Doki Doki Literature Club are required to play this mod and can be downloaded for free at: https://ddlc.moe or on Steam."
+        "Please don't use Steam for mods, though. It usually breaks things."
 
         menu:
             "By playing [config.name] you agree that you have completed Doki Doki Literature Club and accept any spoilers contained within."
             "I agree.":
+                "Thanks for downloading this mod. I hope you enjoy it."
                 pass
 
         $ persistent.first_run = True
@@ -393,7 +396,7 @@ label splashscreen:
                 $ persistent.lets_play = True
                 call screen dialog("Let's Play Mode has been enabled automatically.\nThis mode allows you to skip content that\ncontains sensitive information or apply alternative\nstory options.\n\nThis setting will be dependent on the modder\nif they programmed these checks in their story.\n\n To turn off Let's Play Mode, visit Settings and\nuncheck Let's Play Mode.", 
                     [Hide("dialog"), Return()])
-        scene white
+        scene black
 
     ## This python statement controls whether the Sayori Kill Early screen shows 
     ## in-game. This feature has been commented out for mod safety reasons but can 
@@ -520,9 +523,6 @@ label splashscreen:
     $ splash_message = renpy.random.choice(splash_messages)
     $ config.main_menu_music = audio.t1
     $ renpy.music.play(config.main_menu_music)
-    show intro with Dissolve(0.5, alpha=True)
-    $ pause(2.5)
-    hide intro with Dissolve(0.5, alpha=True)
     show modintro with Dissolve(0.5, alpha=True)
     $ pause(2.5)
     hide modintro with Dissolve(0.5, alpha=True)
@@ -539,6 +539,11 @@ label warningscreen:
     hide intro
     show warning
     pause 3.0
+
+init python:
+    def reset_persistent():
+        persistent._clear(progress=True)
+        renpy.utter_restart()
 
 ## This label is used when 'monika.chr' is deleted when the game starts Day 1 of
 ## Act 1. This feature has been commented out for mod safety reasons but can be
@@ -575,6 +580,9 @@ label after_load:
     $ _dismiss_pause = config.developer
     $ persistent.ghost_menu = False
     $ style.say_dialogue = style.normal
+    $ persistent.loaded += 1
+    if persistent.loaded == 5:
+        $ test1.unlock()
 
     ## This 'if' statement makes sure if we are in Yuri's death CG in
     ## Act 2 to bring us back to the scene at a given time.

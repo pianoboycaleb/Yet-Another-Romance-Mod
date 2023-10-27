@@ -1,4 +1,4 @@
-﻿## This template version is 4.1.0. When asked to provide the template version
+﻿## This template version is 4.2.3. When asked to provide the template version
 ## you are using, give them this version number. 
 ### DO NOT REMOVE OR CHANGE THE ABOVE COMMENT. ###
 
@@ -7,14 +7,14 @@
 # This file customizes what your mod is and and how it starts and builds!
 
 # This controls what your mod is called.
-define config.name = "DDLC Mod Template – Python 2 Edition"
+define config.name = "Yet Another Romance Mod"
 
 # This controls whether you want your mod name to show in the main menu.
 # If your mod name is big, it is suggested to turn this off.
-define gui.show_name = True
+define gui.show_name = False
 
 # This controls the version number of your mod.
-define config.version = "4.2.3-Py2"
+define config.version = "0.1"
 
 # This adds information about your mod in the About screen.
 # DDLC does not have a 'About' screen so you can leave this blank.
@@ -25,7 +25,7 @@ define gui.about = _("")
 # Note:
 #   The build name is ASCII only so no numbers, spaces, or semicolons.
 #   Example: Doki Doki Yuri Time to DokiDokiYuriTime
-define build.name = "DDLCModTemplateTwo-Py2"
+define build.name = "YARM-Beta"
 
 # This configures whether your mod has sound effects.
 define config.has_sound = True
@@ -49,7 +49,7 @@ define config.enter_transition = Dissolve(.2)
 define config.exit_transition = Dissolve(.2)
 
 # This controls the transition effect of DDLC after loading the game.
-define config.after_load_transition = None
+define config.after_load_transition = Dissolve(.5)
 
 # This controls the transition effect when your mod has reached the end of its' story.
 define config.end_game_transition = Dissolve(.5)

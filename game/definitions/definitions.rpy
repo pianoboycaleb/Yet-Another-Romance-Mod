@@ -10,7 +10,7 @@ define persistent.demo = False
 define persistent.steam = ("steamapps" in config.basedir.lower())
 
 # This variable declares whether Developer Mode is on or off in the mod.
-define config.developer = False
+define config.developer = True
 
 # This python statement starts singleton to make sure only one copy of the mod
 # is running.
@@ -1478,6 +1478,8 @@ default persistent.lets_play = False
 #   default cookies = False
 # To make sure a variable is set to a given condition use 'define' rather than 'default'.
 
+default persistent.test2 = False
+default persistent.loaded = 0
 default persistent.playername = ""
 default player = persistent.playername
 default persistent.playthrough = 0

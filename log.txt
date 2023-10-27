@@ -1,41 +1,41 @@
-Thu Oct 26 19:48:16 2023
+Fri Oct 27 12:07:13 2023
 Windows-10-10.0.19041
 Ren'Py 7.6.4.23102301+nightly
  
 
-Bootstrap to the start of init.init. took 0.14s
-Early init. took 0.01s
-Loader init. took 0.03s
-Loading error handling. took 0.05s
-Loading script. took 1.79s
-Loading save slot metadata. took 0.20s
+Bootstrap to the start of init.init. took 0.23s
+Early init. took 0.03s
+Loader init. took 0.05s
+Loading error handling. took 0.08s
+Loading script. took 9.39s
+Loading save slot metadata. took 0.16s
 Loading persistent. took 0.00s
-Running init code. took 0.29s
-Loading analysis data. took 0.09s
-Analyze and compile ATL. took 0.15s
-Reloading save slot metadata. took 0.08s
+Running init code. took 0.45s
+Loading analysis data. took 0.12s
+Analyze and compile ATL. took 0.12s
+Reloading save slot metadata. took 0.10s
 Index archives took 0.00s
 Backing up script files to 'C:\\Users\\Caleb\\AppData\\Roaming/RenPy/backups\\Yet Another Romance Mod':
-Dump and make backups. took 0.22s
+Dump and make backups. took 0.24s
 Cleaning cache. took 0.00s
 Making clean stores. took 0.00s
-Initial gc. took 0.07s
+Initial gc. took 0.09s
 DPI scale factor: 1.000000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: "Couldn't load nvlib." (can be ignored)
 Creating interface object. took 0.01s
 Cleaning stores took 0.00s
-Init translation took 0.10s
+Init translation took 0.12s
 Build styles took 0.01s
 Load screen analysis took 0.00s
-Analyze screens took 0.04s
-Save screen analysis took 0.07s
-Prepare screens took 0.21s
-Save pyanalysis. took 0.13s
-Save bytecode. took 0.10s
+Analyze screens took 0.07s
+Save screen analysis took 0.12s
+Prepare screens took 0.41s
+Save pyanalysis. took 0.15s
+Save bytecode. took 0.13s
 Running _start took 0.01s
 Performance test:
-Interface start. took 0.32s
+Interface start. took 0.82s
 
 Initializing gl2 renderer:
 primary display bounds: (0, 0, 1920, 1200)
@@ -47,4 +47,531 @@ Version: '4.6.0 - Build 31.0.101.2111'
 Display Info: None
 Screen sizes: virtual=(1280, 720) physical=(1280, 720) drawable=(1280, 720)
 Could not open 'cache/shaders.txt':
+Maximum texture size: 4096x4096
+
+Full traceback:
+  File "renpy/common/00gamemenu.rpy", line 174, in script
+    $ ui.interact()
+  File "renpy/ast.py", line 1138, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "renpy/python.py", line 1122, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "renpy/common/00gamemenu.rpy", line 174, in <module>
+    $ ui.interact()
+  File "renpy/ui.py", line 299, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "renpy/display/core.py", line 3582, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
+  File "renpy/display/core.py", line 4055, in interact_core
+    root_widget.visit_all(lambda d : d.per_interact())
+  File "renpy/display/core.py", line 684, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 684, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 684, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 684, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/screen.py", line 476, in visit_all
+    callback(self)
+  File "renpy/display/core.py", line 4055, in <lambda>
+    root_widget.visit_all(lambda d : d.per_interact())
+  File "renpy/display/screen.py", line 487, in per_interact
+    self.update()
+  File "renpy/display/screen.py", line 680, in update
+    self.screen.function(**self.scope)
+  File "game/screens.rpy", line 846, in execute
+    screen save():
+  File "game/screens.rpy", line 846, in execute
+    screen save():
+  File "game/screens.rpy", line 850, in execute
+    use file_slots(_("Save"))
+  File "game/screens.rpy", line 860, in execute
+    screen file_slots(title):
+  File "game/screens.rpy", line 860, in execute
+    screen file_slots(title):
+  File "game/screens.rpy", line 864, in execute
+    use game_menu(title):
+  File "game/screens.rpy", line 641, in execute
+    screen game_menu(title, scroll=None):
+  File "game/screens.rpy", line 641, in execute
+    screen game_menu(title, scroll=None):
+  File "game/screens.rpy", line 652, in execute
+    frame:
+  File "game/screens.rpy", line 655, in execute
+    hbox:
+  File "game/screens.rpy", line 661, in execute
+    frame:
+  File "game/screens.rpy", line 664, in execute
+    if scroll == "viewport":
+  File "game/screens.rpy", line 693, in execute
+    transclude
+  File "game/screens.rpy", line 864, in execute
+    use game_menu(title):
+  File "game/screens.rpy", line 866, in execute
+    fixed:
+  File "game/screens.rpy", line 886, in execute
+    grid gui.file_slot_cols gui.file_slot_rows:
+  File "game/screens.rpy", line 894, in execute
+    for i in range(gui.file_slot_cols * gui.file_slot_rows):
+  File "game/screens.rpy", line 898, in execute
+    button:
+  File "game/screens.rpy", line 898, in keywords
+    button:
+  File "game/screens.rpy", line 899, in <module>
+    action FileActionMod(slot)
+NameError: name 'FileActionMod' is not defined
+
+While running game code:
+  File "renpy/common/00gamemenu.rpy", line 174, in script
+    $ ui.interact()
+  File "renpy/common/00gamemenu.rpy", line 174, in <module>
+    $ ui.interact()
+  File "game/screens.rpy", line 846, in execute
+    screen save():
+  File "game/screens.rpy", line 846, in execute
+    screen save():
+  File "game/screens.rpy", line 850, in execute
+    use file_slots(_("Save"))
+  File "game/screens.rpy", line 860, in execute
+    screen file_slots(title):
+  File "game/screens.rpy", line 860, in execute
+    screen file_slots(title):
+  File "game/screens.rpy", line 864, in execute
+    use game_menu(title):
+  File "game/screens.rpy", line 641, in execute
+    screen game_menu(title, scroll=None):
+  File "game/screens.rpy", line 641, in execute
+    screen game_menu(title, scroll=None):
+  File "game/screens.rpy", line 652, in execute
+    frame:
+  File "game/screens.rpy", line 655, in execute
+    hbox:
+  File "game/screens.rpy", line 661, in execute
+    frame:
+  File "game/screens.rpy", line 664, in execute
+    if scroll == "viewport":
+  File "game/screens.rpy", line 693, in execute
+    transclude
+  File "game/screens.rpy", line 864, in execute
+    use game_menu(title):
+  File "game/screens.rpy", line 866, in execute
+    fixed:
+  File "game/screens.rpy", line 886, in execute
+    grid gui.file_slot_cols gui.file_slot_rows:
+  File "game/screens.rpy", line 894, in execute
+    for i in range(gui.file_slot_cols * gui.file_slot_rows):
+  File "game/screens.rpy", line 898, in execute
+    button:
+  File "game/screens.rpy", line 898, in keywords
+    button:
+  File "game/screens.rpy", line 899, in <module>
+    action FileActionMod(slot)
+NameError: name 'FileActionMod' is not defined
+Resetting cache.
+Bootstrap to the start of init.init. took 163.68s
+Early init. took 0.00s
+Loader init. took 0.02s
+Loading error handling. took 0.08s
+Loading script. took 1.46s
+Loading save slot metadata. took 0.11s
+Loading persistent. took 0.00s
+Running init code. took 0.22s
+Loading analysis data. took 0.09s
+Analyze and compile ATL. took 0.11s
+Reloading save slot metadata. took 0.14s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\Caleb\\AppData\\Roaming/RenPy/backups\\Yet Another Romance Mod':
+Dump and make backups. took 0.20s
+Cleaning cache. took 0.00s
+Making clean stores. took 0.00s
+Initial gc. took 0.11s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: "Couldn't load nvlib." (can be ignored)
+Creating interface object. took 0.00s
+Cleaning stores took 0.00s
+Init translation took 0.14s
+Build styles took 0.01s
+Load screen analysis took 0.00s
+Analyze screens took 0.05s
+Save screen analysis took 0.13s
+Prepare screens took 0.29s
+Save pyanalysis. took 0.16s
+Save bytecode. took 0.05s
+Running _start took 0.00s
+Performance test:
+Interface start. took 0.17s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1200)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'Intel'
+Renderer: 'Intel(R) HD Graphics 615'
+Version: '4.6.0 - Build 31.0.101.2111'
+Display Info: None
+Screen sizes: virtual=(1280, 720) physical=(1280, 720) drawable=(1280, 720)
+Maximum texture size: 4096x4096
+
+Full traceback:
+  File "renpy/common/00gamemenu.rpy", line 174, in script
+    $ ui.interact()
+  File "renpy/ast.py", line 1138, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "renpy/python.py", line 1122, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "renpy/common/00gamemenu.rpy", line 174, in <module>
+    $ ui.interact()
+  File "renpy/ui.py", line 299, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "renpy/display/core.py", line 3582, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
+  File "renpy/display/core.py", line 4055, in interact_core
+    root_widget.visit_all(lambda d : d.per_interact())
+  File "renpy/display/core.py", line 684, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 684, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 684, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 684, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/screen.py", line 476, in visit_all
+    callback(self)
+  File "renpy/display/core.py", line 4055, in <lambda>
+    root_widget.visit_all(lambda d : d.per_interact())
+  File "renpy/display/screen.py", line 487, in per_interact
+    self.update()
+  File "renpy/display/screen.py", line 680, in update
+    self.screen.function(**self.scope)
+  File "game/screens.rpy", line 846, in execute
+    screen save():
+  File "game/screens.rpy", line 846, in execute
+    screen save():
+  File "game/screens.rpy", line 850, in execute
+    use file_slots(_("Save"))
+  File "game/screens.rpy", line 860, in execute
+    screen file_slots(title):
+  File "game/screens.rpy", line 860, in execute
+    screen file_slots(title):
+  File "game/screens.rpy", line 864, in execute
+    use game_menu(title):
+  File "game/screens.rpy", line 641, in execute
+    screen game_menu(title, scroll=None):
+  File "game/screens.rpy", line 641, in execute
+    screen game_menu(title, scroll=None):
+  File "game/screens.rpy", line 652, in execute
+    frame:
+  File "game/screens.rpy", line 655, in execute
+    hbox:
+  File "game/screens.rpy", line 661, in execute
+    frame:
+  File "game/screens.rpy", line 664, in execute
+    if scroll == "viewport":
+  File "game/screens.rpy", line 693, in execute
+    transclude
+  File "game/screens.rpy", line 864, in execute
+    use game_menu(title):
+  File "game/screens.rpy", line 866, in execute
+    fixed:
+  File "game/screens.rpy", line 886, in execute
+    grid gui.file_slot_cols gui.file_slot_rows:
+  File "game/screens.rpy", line 894, in execute
+    for i in range(gui.file_slot_cols * gui.file_slot_rows):
+  File "game/screens.rpy", line 898, in execute
+    button:
+  File "game/screens.rpy", line 898, in keywords
+    button:
+  File "game/screens.rpy", line 899, in <module>
+    action FileActionMod(slot)
+NameError: name 'FileActionMod' is not defined
+
+While running game code:
+  File "renpy/common/00gamemenu.rpy", line 174, in script
+    $ ui.interact()
+  File "renpy/common/00gamemenu.rpy", line 174, in <module>
+    $ ui.interact()
+  File "game/screens.rpy", line 846, in execute
+    screen save():
+  File "game/screens.rpy", line 846, in execute
+    screen save():
+  File "game/screens.rpy", line 850, in execute
+    use file_slots(_("Save"))
+  File "game/screens.rpy", line 860, in execute
+    screen file_slots(title):
+  File "game/screens.rpy", line 860, in execute
+    screen file_slots(title):
+  File "game/screens.rpy", line 864, in execute
+    use game_menu(title):
+  File "game/screens.rpy", line 641, in execute
+    screen game_menu(title, scroll=None):
+  File "game/screens.rpy", line 641, in execute
+    screen game_menu(title, scroll=None):
+  File "game/screens.rpy", line 652, in execute
+    frame:
+  File "game/screens.rpy", line 655, in execute
+    hbox:
+  File "game/screens.rpy", line 661, in execute
+    frame:
+  File "game/screens.rpy", line 664, in execute
+    if scroll == "viewport":
+  File "game/screens.rpy", line 693, in execute
+    transclude
+  File "game/screens.rpy", line 864, in execute
+    use game_menu(title):
+  File "game/screens.rpy", line 866, in execute
+    fixed:
+  File "game/screens.rpy", line 886, in execute
+    grid gui.file_slot_cols gui.file_slot_rows:
+  File "game/screens.rpy", line 894, in execute
+    for i in range(gui.file_slot_cols * gui.file_slot_rows):
+  File "game/screens.rpy", line 898, in execute
+    button:
+  File "game/screens.rpy", line 898, in keywords
+    button:
+  File "game/screens.rpy", line 899, in <module>
+    action FileActionMod(slot)
+NameError: name 'FileActionMod' is not defined
+Resetting cache.
+Bootstrap to the start of init.init. took 286.46s
+Early init. took 0.00s
+Loader init. took 0.02s
+Loading error handling. took 0.03s
+Loading script. took 0.96s
+Loading save slot metadata. took 0.09s
+Loading persistent. took 0.00s
+Running init code. took 0.21s
+Loading analysis data. took 0.10s
+Analyze and compile ATL. took 0.12s
+Reloading save slot metadata. took 0.13s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\Caleb\\AppData\\Roaming/RenPy/backups\\Yet Another Romance Mod':
+Dump and make backups. took 0.21s
+Cleaning cache. took 0.00s
+Making clean stores. took 0.00s
+Initial gc. took 0.10s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: "Couldn't load nvlib." (can be ignored)
+Creating interface object. took 0.00s
+Cleaning stores took 0.00s
+Init translation took 0.13s
+Build styles took 0.01s
+Load screen analysis took 0.00s
+Analyze screens took 0.05s
+Save screen analysis took 0.09s
+Prepare screens took 0.24s
+Save pyanalysis. took 0.15s
+Save bytecode. took 0.05s
+Running _start took 0.00s
+Performance test:
+Interface start. took 0.18s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1200)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'Intel'
+Renderer: 'Intel(R) HD Graphics 615'
+Version: '4.6.0 - Build 31.0.101.2111'
+Display Info: None
+Screen sizes: virtual=(1280, 720) physical=(1280, 720) drawable=(1280, 720)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init. took 451.96s
+Early init. took 0.00s
+Loader init. took 0.03s
+Loading error handling. took 0.05s
+Loading script. took 3.27s
+Loading save slot metadata. took 0.11s
+Loading persistent. took 0.00s
+Running init code. took 0.22s
+Loading analysis data. took 0.10s
+Analyze and compile ATL. took 0.14s
+Reloading save slot metadata. took 0.16s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\Caleb\\AppData\\Roaming/RenPy/backups\\Yet Another Romance Mod':
+Dump and make backups. took 0.26s
+Cleaning cache. took 0.00s
+Making clean stores. took 0.00s
+Initial gc. took 0.15s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: "Couldn't load nvlib." (can be ignored)
+Creating interface object. took 0.00s
+Cleaning stores took 0.00s
+Init translation took 0.17s
+Build styles took 0.01s
+Load screen analysis took 0.00s
+Analyze screens took 0.06s
+Save screen analysis took 0.13s
+Prepare screens took 0.26s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.05s
+Running _start took 0.00s
+Performance test:
+Interface start. took 0.20s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1200)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'Intel'
+Renderer: 'Intel(R) HD Graphics 615'
+Version: '4.6.0 - Build 31.0.101.2111'
+Display Info: None
+Screen sizes: virtual=(1280, 720) physical=(1280, 720) drawable=(1280, 720)
+Maximum texture size: 4096x4096
+Cleaning stores took 0.00s
+Init translation took 0.00s
+Build styles took 0.01s
+Load screen analysis took 0.06s
+Analyze screens took 0.00s
+Prepare screens took 0.00s
+Running _start took 0.00s
+
+Full traceback:
+  File "renpy/common/00gamemenu.rpy", line 174, in script
+    $ ui.interact()
+  File "renpy/ast.py", line 1138, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "renpy/python.py", line 1122, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "renpy/common/00gamemenu.rpy", line 174, in <module>
+    $ ui.interact()
+  File "renpy/ui.py", line 299, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "renpy/display/core.py", line 3582, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
+  File "renpy/display/core.py", line 4055, in interact_core
+    root_widget.visit_all(lambda d : d.per_interact())
+  File "renpy/display/core.py", line 684, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 684, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 684, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 684, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/screen.py", line 476, in visit_all
+    callback(self)
+  File "renpy/display/core.py", line 4055, in <lambda>
+    root_widget.visit_all(lambda d : d.per_interact())
+  File "renpy/display/screen.py", line 487, in per_interact
+    self.update()
+  File "renpy/display/screen.py", line 680, in update
+    self.screen.function(**self.scope)
+  File "game/achievements.rpy", line 105, in execute
+    screen achievements():
+  File "game/achievements.rpy", line 105, in execute
+    screen achievements():
+  File "game/achievements.rpy", line 110, in execute
+    use game_menu(_("Achievements")):
+  File "game/screens.rpy", line 641, in execute
+    screen game_menu(title, scroll=None):
+  File "game/screens.rpy", line 641, in execute
+    screen game_menu(title, scroll=None):
+  File "game/screens.rpy", line 652, in execute
+    frame:
+  File "game/screens.rpy", line 655, in execute
+    hbox:
+  File "game/screens.rpy", line 661, in execute
+    frame:
+  File "game/screens.rpy", line 664, in execute
+    if scroll == "viewport":
+  File "game/screens.rpy", line 693, in execute
+    transclude
+  File "game/achievements.rpy", line 110, in execute
+    use game_menu(_("Achievements")):
+  File "game/achievements.rpy", line 186, in execute
+    if config.developer:
+  File "game/achievements.rpy", line 187, in execute
+    textbutton "Test Notif":
+  File "game/achievements.rpy", line 187, in keywords
+    textbutton "Test Notif":
+  File "game/achievements.rpy", line 190, in <module>
+    action Function(lets_count.increase_count)
+NameError: name 'lets_count' is not defined
+
+While running game code:
+  File "renpy/common/00gamemenu.rpy", line 174, in script
+    $ ui.interact()
+  File "renpy/common/00gamemenu.rpy", line 174, in <module>
+    $ ui.interact()
+  File "game/achievements.rpy", line 105, in execute
+    screen achievements():
+  File "game/achievements.rpy", line 105, in execute
+    screen achievements():
+  File "game/achievements.rpy", line 110, in execute
+    use game_menu(_("Achievements")):
+  File "game/screens.rpy", line 641, in execute
+    screen game_menu(title, scroll=None):
+  File "game/screens.rpy", line 641, in execute
+    screen game_menu(title, scroll=None):
+  File "game/screens.rpy", line 652, in execute
+    frame:
+  File "game/screens.rpy", line 655, in execute
+    hbox:
+  File "game/screens.rpy", line 661, in execute
+    frame:
+  File "game/screens.rpy", line 664, in execute
+    if scroll == "viewport":
+  File "game/screens.rpy", line 693, in execute
+    transclude
+  File "game/achievements.rpy", line 110, in execute
+    use game_menu(_("Achievements")):
+  File "game/achievements.rpy", line 186, in execute
+    if config.developer:
+  File "game/achievements.rpy", line 187, in execute
+    textbutton "Test Notif":
+  File "game/achievements.rpy", line 187, in keywords
+    textbutton "Test Notif":
+  File "game/achievements.rpy", line 190, in <module>
+    action Function(lets_count.increase_count)
+NameError: name 'lets_count' is not defined
+Resetting cache.
+Bootstrap to the start of init.init. took 506.85s
+Early init. took 0.00s
+Loader init. took 0.03s
+Loading error handling. took 0.03s
+Loading script. took 0.73s
+Loading save slot metadata. took 0.09s
+Loading persistent. took 0.00s
+Running init code. took 0.21s
+Loading analysis data. took 0.10s
+Analyze and compile ATL. took 0.11s
+Reloading save slot metadata. took 0.14s
+Index archives took 0.00s
+Backing up script files to 'C:\\Users\\Caleb\\AppData\\Roaming/RenPy/backups\\Yet Another Romance Mod':
+Dump and make backups. took 0.22s
+Cleaning cache. took 0.00s
+Making clean stores. took 0.00s
+Initial gc. took 0.12s
+DPI scale factor: 1.000000
+nvdrs: Loaded, about to disable thread optimizations.
+nvdrs: "Couldn't load nvlib." (can be ignored)
+Creating interface object. took 0.00s
+Cleaning stores took 0.00s
+Init translation took 0.13s
+Build styles took 0.01s
+Load screen analysis took 0.00s
+Analyze screens took 0.04s
+Save screen analysis took 0.09s
+Prepare screens took 0.25s
+Save pyanalysis. took 0.18s
+Save bytecode. took 0.05s
+Running _start took 0.00s
+Performance test:
+Interface start. took 0.18s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1920, 1200)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'Intel'
+Renderer: 'Intel(R) HD Graphics 615'
+Version: '4.6.0 - Build 31.0.101.2111'
+Display Info: None
+Screen sizes: virtual=(1280, 720) physical=(1280, 720) drawable=(1280, 720)
 Maximum texture size: 4096x4096
