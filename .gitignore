@@ -1,0 +1,10 @@
+*.rpyc
+*.rpa
+saves/
+cache/
+DDLCModTemplate.xcodeproj/
+characters/
+game/chrs/
+__MACOSX/
+.vscode/
+Documentation/
